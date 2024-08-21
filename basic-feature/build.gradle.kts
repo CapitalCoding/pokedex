@@ -58,7 +58,6 @@ dependencies {
     implementation(libs.navigation.hilt)
     implementation(libs.kotlin.serialization)
     implementation(libs.retrofit)
-    implementation(libs.room)
     implementation(libs.timber)
     testImplementation(libs.bundles.common.test)
     androidTestImplementation(libs.bundles.common.android.test)

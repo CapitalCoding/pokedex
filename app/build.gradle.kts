@@ -61,13 +61,11 @@ dependencies {
 
     implementation(libs.hilt)
     implementation(libs.navigation) // needed for Room
-    implementation(libs.room.ktx)
     implementation(libs.timber)
 
     implementation(libs.test.android.profile.installer)
 
     ksp(libs.hilt.compiler)
-    ksp(libs.room.compiler)
 }
 
 ksp {

@@ -21,7 +21,6 @@ navigation                          = "2.7.7"
 navigation-hilt                     = "1.2.0"
 okhttp-logging-interceptor          = "4.12.0"
 retrofit                            = "2.11.0"
-room                                = "2.6.1"
 timber                              = "5.0.1"
 
 # test libraries
@@ -72,9 +71,6 @@ navigation                          = { group = "androidx.navigation", name = "n
 navigation-hilt                     = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "navigation-hilt" }
 okhttp-logging-interceptor          = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp-logging-interceptor" }
 retrofit                            = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-room                                = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-room-compiler                       = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-room-ktx                            = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 timber                              = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 # test libraries

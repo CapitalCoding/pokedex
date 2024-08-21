@@ -1,8 +1,8 @@
 package tech.capitalcoding.basic_feature
 
-import org.junit.Test
 
-import org.junit.Assert.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 /**
  * Example local unit test, which will execute on the development machine (host).
