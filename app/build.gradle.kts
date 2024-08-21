@@ -57,6 +57,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":basic-feature"))
 
     implementation(libs.hilt)
     implementation(libs.navigation) // needed for Room
