@@ -1,4 +1,4 @@
-package tech.capitalcoding.basic_feature
+package tech.capitalcoding.pokedex.basic_feature
 
 
 import kotlin.test.Test

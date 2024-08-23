@@ -1,4 +1,4 @@
-package tech.capitalcoding.basic_feature
+package tech.capitalcoding.pokedex.basic_feature
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
