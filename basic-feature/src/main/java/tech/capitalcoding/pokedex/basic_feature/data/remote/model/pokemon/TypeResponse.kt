@@ -1,7 +1,6 @@
 package tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 @Serializable
 data class TypeResponse(
