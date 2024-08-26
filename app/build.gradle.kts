@@ -57,6 +57,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
     implementation(project(":basic-feature"))
 
     implementation(libs.hilt)
@@ -66,8 +67,4 @@ dependencies {
     implementation(libs.test.android.profile.installer)
 
     ksp(libs.hilt.compiler)
-}
-
-ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
 }
