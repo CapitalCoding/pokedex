@@ -13,12 +13,14 @@ android {
     namespace = "tech.capitalcoding.pokedex.core"
     compileSdk = 34
 
-    defaultConfig {
+    with (defaultConfig) {
         minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
+
+    defaultConfig {
+        buildConfigField("String", "POKEDEX_API_URL", "\"https://pokeapi.co/api/v2/\"")
+    }
+
 
     buildTypes {
         release {
@@ -29,6 +31,16 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+        compose = true
+    }
+
+    composeCompiler {
+        enableStrongSkippingMode = true
+    }
+
     kotlin {
         jvmToolchain(17)
 
