@@ -9,8 +9,6 @@ import retrofit2.Retrofit
 import tech.capitalcoding.pokedex.basic_feature.data.remote.api.PokemonApi
 import tech.capitalcoding.pokedex.basic_feature.data.repository.PokemonRepositoryImpl
 import tech.capitalcoding.pokedex.basic_feature.domain.repository.PokemonRepository
-import tech.capitalcoding.pokedex.basic_feature.domain.usecase.GetPokemonsUseCase
-import tech.capitalcoding.pokedex.basic_feature.domain.usecase.getPokemons
 import javax.inject.Singleton
 
 @Module
@@ -21,13 +19,6 @@ internal object PokemonModule {
     @Singleton
     fun providePokemonApi(retrofit: Retrofit): PokemonApi {
         return retrofit.create(PokemonApi::class.java)
-    }
-
-    @Provides
-    fun provideGetPokemonsUseCase(pokemonRepository: PokemonRepository): GetPokemonsUseCase {
-        return GetPokemonsUseCase {
-            getPokemons(pokemonRepository)
-        }
     }
 
     @Module
