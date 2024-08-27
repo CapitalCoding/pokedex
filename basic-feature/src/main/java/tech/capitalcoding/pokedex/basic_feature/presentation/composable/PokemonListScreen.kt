@@ -14,7 +14,6 @@ import tech.capitalcoding.pokedex.core.utils.collectWithLifecycle
 
 @Composable
 fun PokemonsRoute(viewModel: PokemonListViewModel = hiltViewModel()) {
-    HandleEvents(viewModel.getEvents())
     val uiState by viewModel.uiState.collectAsState()
 
     PokemonListScreen(
@@ -44,17 +43,4 @@ fun PokemonListScreen(
         showPreviousPageBtn = (uiState.pokemons as? PagedPokemonList)?.let { uiState.pokemons.previousOffset != null } ?: false,
         showNextPageBtn = (uiState.pokemons as? PagedPokemonList)?.let { uiState.pokemons.nextOffset != null } ?: false,
     )
-}
-
-
-@Composable
-private fun HandleEvents(events: Flow<PokemonsEvent>) {
-
-    events.collectWithLifecycle {
-        when (it) {
-            is PokemonsEvent.openPokemonDetails -> {
-                //TODO: open details
-            }
-        }
-    }
 }
