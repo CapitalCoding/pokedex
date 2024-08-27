@@ -1,11 +1,14 @@
 package tech.capitalcoding.pokedex.basic_feature.data.mapper
 
 import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonDetailResponse
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.type.PokemonTypeResponse
 import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonsListItemResponse
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.SpritesResponse
 import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.StatsResponse
-import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.TypeResponse
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.type.TypeResponse
 import tech.capitalcoding.pokedex.basic_feature.domain.model.BasePokemon
 import tech.capitalcoding.pokedex.basic_feature.domain.model.Pokemon
+import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonSprites
 import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonStat
 import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonType
 
@@ -20,7 +23,17 @@ fun PokemonDetailResponse.toDomainModel(): Pokemon {
         weight = this.weight,
         types = this.types.map { it.toDomainModel() },
         abilities = this.abilities.map { it.ability.name },
-        stats = this.stats.map { it.toDomainModel() }
+        stats = this.stats.map { it.toDomainModel() },
+        sprites = this.sprites.toDomainModel()
+    )
+}
+
+private fun SpritesResponse.toDomainModel(): PokemonSprites {
+    return PokemonSprites(
+        frontDefault = this.frontDefault,
+        backDefault = this.backDefault,
+        frontShiny = this.frontShiny,
+        backShiny = this.backShiny
     )
 }
 
@@ -52,4 +65,13 @@ fun TypeResponse.toDomainModel(): PokemonType {
 
 fun extractPokemonIdFromUrl(url: String): String {
     return url.trimEnd('/').substringAfterLast('/')
+}
+
+
+fun PokemonTypeResponse.toDomainModel(): PokemonType {
+    return PokemonType(
+        name = this.name,
+        url = this.url,
+        slot = 0
+    )
 }

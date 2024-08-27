@@ -1,6 +1,7 @@
-package tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon
+package tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.type
 
 import kotlinx.serialization.*
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.Slottable
 
 @Serializable
 data class TypeResponse(

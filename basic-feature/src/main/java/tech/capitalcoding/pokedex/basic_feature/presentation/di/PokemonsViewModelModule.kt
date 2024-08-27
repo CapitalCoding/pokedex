@@ -8,6 +8,8 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import tech.capitalcoding.pokedex.basic_feature.presentation.PokemonsNavigationFactory
 import tech.capitalcoding.pokedex.basic_feature.presentation.PokemonsUiState
+import tech.capitalcoding.pokedex.basic_feature.presentation.pokemon.details.DetailUiState
+import tech.capitalcoding.pokedex.basic_feature.presentation.pokemon.search.SearchUiState
 import tech.capitalcoding.pokedex.core.navigation.NavigationFactory
 import javax.inject.Singleton
 
@@ -16,6 +18,12 @@ import javax.inject.Singleton
 internal object PokemonsViewModelModule {
     @Provides
     fun provideInitialPokemonsUiState(): PokemonsUiState = PokemonsUiState()
+
+    @Provides
+    fun provideInitialSearchUiState(): SearchUiState = SearchUiState()
+
+    @Provides
+    fun provideInitialPokemonDetailsUiState(): DetailUiState = DetailUiState()
 }
 
 @Module

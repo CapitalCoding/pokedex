@@ -7,22 +7,21 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.retryWhen
 import tech.capitalcoding.pokedex.basic_feature.domain.model.BasePokemon
 import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonListResult
+import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonType
+import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonTypeListResult
 import tech.capitalcoding.pokedex.basic_feature.domain.repository.PokemonRepository
 import javax.inject.Inject
 
 private const val RETRY_TIME_IN_MILLIS = 15_000L
 
-class GetPokemonsUseCase @Inject constructor(
-    private val pokemonRepository: PokemonRepository,
-    ): UseCase<GetPokemonsParams, PokemonListResult<BasePokemon>>(){
+class GetPokemonListByTypeUseCase @Inject constructor(
+    private val repository: PokemonRepository
+): UseCase<GetPokeListByTypeParams, PokemonTypeListResult<BasePokemon>>() {
 
-    override fun execute(params: GetPokemonsParams): Flow<Result<PokemonListResult<BasePokemon>>> =
-        pokemonRepository.getPokemonList(limit = params.limit, offset = params.offset)
-            .map {
-                Result.success(it)
-            }
-            .retryWhen {
-                    cause, _ ->
+    override fun execute(params: GetPokeListByTypeParams): Flow<Result<PokemonTypeListResult<BasePokemon>>> =
+        repository.getPokemonListByType(params.type)
+            .map { Result.success(it) }
+            .retryWhen { cause, attempt ->
                 if (cause is Exception) {
                     emit(Result.failure(cause))
                     delay(RETRY_TIME_IN_MILLIS)
@@ -34,8 +33,7 @@ class GetPokemonsUseCase @Inject constructor(
             .catch {
                 emit(Result.failure(it))
             }
+    }
 
-}
 
-data class GetPokemonsParams(val limit: Int, val offset: Int)
-
+data class GetPokeListByTypeParams(val type: String)

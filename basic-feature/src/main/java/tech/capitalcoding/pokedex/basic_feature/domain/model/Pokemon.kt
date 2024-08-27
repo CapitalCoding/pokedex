@@ -8,5 +8,6 @@ data class Pokemon(
     val weight: Int,
     val types: List<PokemonType>,
     val abilities: List<String>,
-    val stats: List<PokemonStat>
+    val stats: List<PokemonStat>,
+    val sprites: PokemonSprites,
 )

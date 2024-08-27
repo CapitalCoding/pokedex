@@ -5,26 +5,27 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonListResponse
 import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonDetailResponse
-import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonTypeListResponse
-import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.PokemonTypeResponse
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.type.PokemonTypeListItemResponse
+import tech.capitalcoding.pokedex.basic_feature.data.remote.model.pokemon.type.PokemonTypeListResponse
+import tech.capitalcoding.pokedex.core.BuildConfig
 
 interface PokemonApi {
 
     @GET("pokemon")
     suspend fun getPokemons(
         @Query("offset") offset: Int =  0,
-        @Query("limit") limit: Int = 20
+        @Query("limit") limit: Int = BuildConfig.POKEDEX_DEFAULT_PAGE_LIMIT
     ): PokemonListResponse
 
     @GET("pokemon/{id}")
-    suspend fun getPokemonById(@Path("id") id: Int): PokemonDetailResponse
-
-    @GET("pokemon/{name}")
-    suspend fun getPokemonByName(@Path("name") name: String): PokemonDetailResponse
+    suspend fun getPokemonByIdOrName(@Path("id") id: String): PokemonDetailResponse
 
     @GET("type")
-    suspend fun getPokemonTypes(): PokemonTypeListResponse
+    suspend fun getPokemonTypes(
+        @Query("offset") offset: Int = 0,
+        @Query("limit") limit: Int = BuildConfig.POKEDEX_DEFAULT_PAGE_LIMIT
+    ): PokemonTypeListResponse
 
     @GET("type/{id}")
-    suspend fun getPokemonTypeByName(name: String): PokemonTypeResponse
+    suspend fun getPokemonTypeByName(@Path("id") name: String): PokemonTypeListItemResponse
 }
