@@ -25,7 +25,8 @@ fun PokemonDetailResponse.toDomainModel(): Pokemon {
 }
 
 
-fun PokemonsListItemResponse.toDomainModel(id: String): BasePokemon {
+fun PokemonsListItemResponse.toDomainModel(): BasePokemon {
+    val id = extractPokemonIdFromUrl(this.url)
     return BasePokemon(
         id = id,
         name = this.name,
@@ -47,4 +48,8 @@ fun TypeResponse.toDomainModel(): PokemonType {
         url = this.item.url,
         slot = this.slot
     )
+}
+
+fun extractPokemonIdFromUrl(url: String): String {
+    return url.trimEnd('/').substringAfterLast('/')
 }

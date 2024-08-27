@@ -19,6 +19,8 @@ android {
 
     defaultConfig {
         buildConfigField("String", "POKEDEX_API_URL", "\"https://pokeapi.co/api/v2/\"")
+        buildConfigField("int", "POKEDEX_DEFAULT_PAGE_LIMIT", "20")
+
     }
 
 

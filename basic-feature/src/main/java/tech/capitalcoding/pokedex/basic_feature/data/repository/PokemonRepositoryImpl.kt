@@ -6,6 +6,7 @@ import tech.capitalcoding.pokedex.basic_feature.data.mapper.toDomainModel
 import tech.capitalcoding.pokedex.basic_feature.data.remote.api.PokemonApi
 import tech.capitalcoding.pokedex.basic_feature.domain.model.BasePokemon
 import tech.capitalcoding.pokedex.basic_feature.domain.model.Pokemon
+import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonListResult
 import tech.capitalcoding.pokedex.basic_feature.domain.repository.PokemonRepository
 import javax.inject.Inject
 
@@ -16,10 +17,21 @@ class PokemonRepositoryImpl @Inject constructor(
     override fun getPokemonList(
         limit: Int,
         offset: Int
-    ): Flow<List<BasePokemon>> = flow {
+    ): Flow<PokemonListResult<BasePokemon>> = flow {
         val response = pokemonApi.getPokemons(limit = limit, offset = offset)
-        val basePokemonList = response.results.map { it.toDomainModel(id = (response.results.indexOf(it) + 1).toString()) }
-        emit(basePokemonList)
+
+        val basePokemonList = response.results.map { it.toDomainModel() }
+
+        emit(
+            PokemonListResult(
+                count = response.count,
+                next = response.next,
+                previous = response.previous,
+                items = basePokemonList,
+                nextOffset = extractOffsetFromUrl(response.next),
+                previousOffset = extractOffsetFromUrl(response.previous)
+            )
+        )
     }
 
     override suspend fun getPokemon(id: String): Flow<Pokemon> {
@@ -34,5 +46,12 @@ class PokemonRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    private fun extractOffsetFromUrl(url: String?): Int? {
+        return url?.let {
+            val queryParams = it.split("?").last().split("&")
+            val offsetParam = queryParams.find { param -> param.startsWith("offset=") }
+            offsetParam?.split("=")?.get(1)?.toIntOrNull()
+        }
+    }
 }
 

@@ -3,10 +3,11 @@ package tech.capitalcoding.pokedex.basic_feature.domain.repository
 import kotlinx.coroutines.flow.Flow
 import tech.capitalcoding.pokedex.basic_feature.domain.model.BasePokemon
 import tech.capitalcoding.pokedex.basic_feature.domain.model.Pokemon
+import tech.capitalcoding.pokedex.basic_feature.domain.model.PokemonListResult
 
 
 interface PokemonRepository {
-    fun getPokemonList(limit: Int, offset: Int): Flow<List<BasePokemon>>
+    fun getPokemonList(limit: Int, offset: Int): Flow<PokemonListResult<BasePokemon>>
     suspend fun getPokemon(id: String): Flow<Pokemon>
     suspend fun getPokemonListByType(type: String): Flow<List<Pokemon>>
     suspend fun getPokemonImage(id: String): Flow<String>
