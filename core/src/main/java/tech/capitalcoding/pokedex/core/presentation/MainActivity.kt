@@ -4,9 +4,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -40,7 +48,13 @@ class MainActivity : ComponentActivity() {
             PokedexTheme {
                 val navController = rememberNavController()
                 Scaffold(
-                    topBar = { PokemonTopBar() }
+                    topBar = {
+                        PokemonTopBar(
+                            onSearchClick = { navController.navigate(NavigationDestination.Search.route) },
+                        ) {
+                            navController.navigate(NavigationDestination.Pokemons.route)
+                        }
+                    }
                 ) {
                     NavigationHost(
                         modifier = Modifier
@@ -66,13 +80,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PokemonTopBar() {
+fun PokemonTopBar(onSearchClick: () -> Unit, onTitleClick: () -> Unit) {
     TopAppBar(
-        title = { Text("Pokédex") },
+        title = { Text(
+            text = "Pokédex",
+            modifier = Modifier.clickable { onTitleClick() }
+        ) },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = PrimaryColor,
             titleContentColor = OnPrimaryColor
         ),
+        actions = {
+            IconButton(
+                onClick = onSearchClick,
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Icon(Icons.Outlined.Search, contentDescription = "Search")
+            }
+        },
         modifier = Modifier.height(56.dp)
     )
 }
