@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
+import tech.capitalcoding.basic_feature.R
 import tech.capitalcoding.pokedex.basic_feature.presentation.model.PokemonDisplayable
 
 @Composable
@@ -51,6 +52,8 @@ fun PokemonItem(pokemon: PokemonDisplayable, onPokemonClick: (Int) -> Unit) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(pokemon.imageUrl)
+                    .placeholder(R.drawable.loading_pokemon_placeholder)
+                    .error(R.drawable.pokemon_placeholder)
                     .crossfade(true)
                     .build(),
                 contentDescription = pokemon.name,

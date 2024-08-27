@@ -1,5 +1,6 @@
 package tech.capitalcoding.pokedex.basic_feature.presentation.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -101,7 +102,11 @@ fun SearchScreen(
                                     selected = selectedType == pokemonType,
                                     onClick = { selectedType = pokemonType }
                                 )
-                                Text(pokemonType.name)
+                                Text(
+                                    text = pokemonType.name,
+                                    modifier = Modifier.padding(start = 8.dp)
+                                        .clickable { selectedType = pokemonType }
+                                )
                             }
                         }
                     }

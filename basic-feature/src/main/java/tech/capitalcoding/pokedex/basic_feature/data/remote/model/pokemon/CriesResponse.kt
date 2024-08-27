@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CriesResponse(
-    val latest: String,
-    val legacy: String
+    val latest: String?,
+    val legacy: String?
 )

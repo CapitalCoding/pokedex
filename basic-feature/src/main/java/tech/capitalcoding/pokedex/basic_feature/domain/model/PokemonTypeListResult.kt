@@ -9,6 +9,4 @@ data class PokemonTypeListResult<T>(
     val id: Int,
     val name: String,
     val results: @RawValue List<T>
-): Parcelable {
-
-}
+): Parcelable

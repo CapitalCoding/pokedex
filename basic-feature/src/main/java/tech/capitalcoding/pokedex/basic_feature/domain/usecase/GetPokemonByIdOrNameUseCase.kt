@@ -1,5 +1,7 @@
 package tech.capitalcoding.pokedex.basic_feature.domain.usecase
 
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toLowerCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -15,7 +17,7 @@ class GetPokemonByIdOrNameUseCase @Inject constructor(
 ): UseCase<GetPokemonByIdOrNameParams, Pokemon>() {
 
     override fun execute(params: GetPokemonByIdOrNameParams) =
-        repository.getPokemon(params.idOrName)
+        repository.getPokemon(params.idOrName.toLowerCase(Locale.current))
             .map { Result.success(it) }
             .retryWhen { cause, attempt ->
                 if (cause is Exception) {

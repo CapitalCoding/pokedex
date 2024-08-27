@@ -1,20 +1,24 @@
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.*
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,26 +29,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
+import tech.capitalcoding.basic_feature.R
 import tech.capitalcoding.pokedex.basic_feature.presentation.composable.ErrorScreen
-import tech.capitalcoding.pokedex.basic_feature.presentation.model.DisplayablePokemonDetails
 import tech.capitalcoding.pokedex.basic_feature.presentation.pokemon.details.DetailIntent
 import tech.capitalcoding.pokedex.basic_feature.presentation.pokemon.details.DetailUiState
 import tech.capitalcoding.pokedex.basic_feature.presentation.pokemon.details.DetailViewModel
-import kotlin.reflect.KFunction1
 
 @Composable
 fun PokemonDetailRoute(viewModel: DetailViewModel = hiltViewModel()) {
-    HandleEvents(viewModel.getEvents())
     val uiState by viewModel.uiState.collectAsState()
 
-    PokemonDetailsScreen(
+    DetailsScreen(
         uiState = uiState,
         onIntent = viewModel::acceptIntent
     )
 }
 
 @Composable
-fun PokemonDetailsScreen(
+fun DetailsScreen(
     uiState: DetailUiState,
     onIntent: (DetailIntent) -> Unit
 ) {
@@ -121,6 +123,8 @@ fun PokemonDetailsScreen(
                                     model = ImageRequest.Builder(LocalContext.current)
                                         .data(uiState.pokemon.spriteShinyFront)
                                         .crossfade(true)
+                                        .placeholder(R.drawable.loading_pokemon_placeholder)
+                                        .error(R.drawable.pokemon_placeholder)
                                         .build(),
                                     contentDescription = "${uiState.pokemon.name} Shiny Sprite",
                                     contentScale = ContentScale.Crop,
@@ -134,9 +138,5 @@ fun PokemonDetailsScreen(
                 }
             }
         }
-            }
         }
-
-class HandleEvents(events: Any) {
-
-}
+        }

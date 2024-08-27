@@ -9,7 +9,7 @@ data class PokemonDetailResponse(
     val abilities: List<AbilityResponse>,
     val cries: CriesResponse,
     @SerialName("base_experience")
-    val baseExperience: Int,
+    val baseExperience: Int?,
     val forms: List<FormResponse>,
     val height: Int,
     val id: Int,

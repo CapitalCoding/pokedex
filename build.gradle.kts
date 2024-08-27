@@ -14,3 +14,20 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.ktlint) apply false
 }
+
+allprojects {
+    apply(
+        plugin = "io.gitlab.arturbosch.detekt"
+    )
+
+    detekt {
+        buildUponDefaultConfig = true
+        config.setFrom(files("$rootDir/gradle/detekt.yml"))
+    }
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.compose.rules)
+    }
+}

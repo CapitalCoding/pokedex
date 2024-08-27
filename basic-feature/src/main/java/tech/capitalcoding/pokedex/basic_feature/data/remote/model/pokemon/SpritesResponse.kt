@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SpritesResponse(
     @SerialName("back_default")
-    val backDefault: String,
+    val backDefault: String?,
     @SerialName("back_female")
     val backFemale: String?,
     @SerialName("back_shiny")
-    val backShiny: String,
+    val backShiny: String?,
     @SerialName("back_shiny_female")
     val backShinyFemale: String?,
     @SerialName("front_default")
